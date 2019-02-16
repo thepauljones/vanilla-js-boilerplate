@@ -1,5 +1,6 @@
 window.addEventListener('load', () => {
 
-    console.log('JS loaded');
+    const content = `The current US President is: ${CURRENT_US_PRESIDENT}`;
+    document.body.innerHTML = content;
 
 });
