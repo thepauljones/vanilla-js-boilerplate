@@ -3,14 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        js: path.resolve(__dirname, 'src/index.js'),
+        styles: path.resolve(__dirname, 'src/scss/index.scss')
+    },
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
         contentBase: './dist'
     },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     plugins: [
@@ -23,7 +26,15 @@ module.exports = {
         })
     ],
     module: {
-      rules: [
+        rules: [
+        {
+            test: /\.scss$/,
+            use: [
+                'style-loader', // creates style nodes from JS strings
+                'css-loader', // translates CSS into CommonJS
+                'sass-loader' // compiles Sass to CSS, using Node Sass by default
+            ]
+        },
         {
           test: /\.m?js$/,
           exclude: /(node_modules)/,
@@ -33,7 +44,6 @@ module.exports = {
               presets: ['@babel/preset-env']
             }
           }
-        }
-      ]
+        }]
     }
 };
