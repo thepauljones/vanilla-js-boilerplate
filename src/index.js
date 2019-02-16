@@ -1,5 +1,5 @@
 window.addEventListener('load', () => {
 
-    alert('this should work');
+    console.log('JS loaded');
 
 });
